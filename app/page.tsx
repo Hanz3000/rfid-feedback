@@ -107,30 +107,39 @@ export default function Home() {
       {/* ELEMENT AUDIO GLOBAL */}
       <audio ref={audioRef} onEnded={handleAudioEnded} className="hidden" />
 
-      {/* --- BACKGROUND DEKORATIF KARTUN --- */}
+      {/* --- BACKGROUND DEKORATIF KARTUN (YANG SUDAH DIUPDATE ANIMASINYA) --- */}
       <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
-        {/* Awan-awan Mengambang */}
-        <div className="absolute top-[5%] left-[10%] w-32 h-16 bg-white/90 rounded-full shadow-lg animate-float" style={{ animationDelay: '0s' }}></div>
-        <div className="absolute top-[5%] left-[12%] w-24 h-12 bg-white/80 rounded-full shadow-md"></div>
+        
+        {/* Awan-awan (Sekarang bergerak kiri-kanan & atas-bawah) */}
+        <div className="absolute top-[5%] left-[10%] w-32 h-16 bg-white/90 rounded-full shadow-lg" 
+             style={{ animation: 'cloud-drift 8s ease-in-out infinite alternate' }}></div>
+        <div className="absolute top-[8%] left-[12%] w-24 h-12 bg-white/80 rounded-full shadow-md"
+             style={{ animation: 'cloud-drift 8s ease-in-out infinite alternate', animationDelay: '1s' }}></div>
 
-        <div className="absolute top-[15%] right-[15%] w-40 h-20 bg-white/90 rounded-full shadow-lg animate-float" style={{ animationDelay: '2s' }}></div>
-        <div className="absolute top-[15%] right-[18%] w-28 h-14 bg-white/80 rounded-full shadow-md"></div>
+        <div className="absolute top-[15%] right-[15%] w-40 h-20 bg-white/90 rounded-full shadow-lg" 
+             style={{ animation: 'cloud-drift 10s ease-in-out infinite alternate-reverse' }}></div>
+        <div className="absolute top-[18%] right-[18%] w-28 h-14 bg-white/80 rounded-full shadow-md"
+             style={{ animation: 'cloud-drift 10s ease-in-out infinite alternate-reverse', animationDelay: '2s' }}></div>
 
-        <div className="absolute bottom-[20%] left-[5%] w-36 h-18 bg-white/85 rounded-full shadow-lg animate-float" style={{ animationDelay: '4s' }}></div>
-        <div className="absolute bottom-[20%] left-[8%] w-24 h-12 bg-white/75 rounded-full shadow-md"></div>
+        <div className="absolute bottom-[20%] left-[5%] w-36 h-18 bg-white/85 rounded-full shadow-lg" 
+             style={{ animation: 'cloud-drift 12s ease-in-out infinite alternate' }}></div>
+        
+        {/* Awan Tambahan (Biar lebih ramai) */}
+        <div className="absolute top-[40%] right-[5%] w-24 h-12 bg-white/60 rounded-full blur-sm"
+             style={{ animation: 'cloud-drift 15s ease-in-out infinite alternate' }}></div>
 
         {/* Bintang-bintang Berkelap-kelip */}
-        <div className="absolute top-[10%] left-[25%] text-3xl animate-twinkle" style={{ animationDelay: '0s' }}>⭐</div>
+        <div className="absolute top-[10%] left-[25%] text-3xl animate-twinkle">⭐</div>
         <div className="absolute top-[30%] right-[20%] text-2xl animate-twinkle" style={{ animationDelay: '1s' }}>✨</div>
         <div className="absolute bottom-[15%] right-[10%] text-3xl animate-twinkle" style={{ animationDelay: '2s' }}>🌟</div>
         <div className="absolute top-[50%] left-[8%] text-2xl animate-twinkle" style={{ animationDelay: '3s' }}>⭐</div>
 
-        {/* Matahari Ceria */}
-        <div className="absolute top-[8%] right-[8%] w-24 h-24 bg-gradient-to-br from-yellow-300 to-orange-400 rounded-full shadow-2xl flex items-center justify-center text-4xl animate-spin-slow">
-          ☀️
+        {/* Matahari Ceria (Berputar & Berdenyut) */}
+        <div className="absolute top-[5%] right-[5%] w-28 h-28 flex items-center justify-center animate-spin-slow hover:scale-110 transition-transform duration-500">
+           <div className="text-6xl drop-shadow-2xl">☀️</div>
         </div>
 
-        {/* Pelangi */}
+        {/* Pelangi (Sedikit transparan dan diam) */}
         <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-[600px] h-[300px] opacity-40">
           <div className="absolute bottom-0 w-full h-12 bg-gradient-to-r from-red-400 via-yellow-300 to-green-400 rounded-t-full"></div>
           <div className="absolute bottom-3 w-full h-12 bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 rounded-t-full"></div>
@@ -146,11 +155,12 @@ export default function Home() {
           {/* Border Inner Glow Effect */}
           <div className={`absolute inset-0 rounded-[42px] transition-all duration-500 pointer-events-none border-4 ${status === 'success' || status === 'success_waiting' ? 'border-green-400 shadow-[inset_0_0_30px_rgba(74,222,128,0.5)]' : 'border-pink-300 shadow-[inset_0_0_20px_rgba(249,168,212,0.3)]'}`}></div>
 
-          {/* Dekorasi Sudut */}
-          <div className="absolute top-4 left-4 text-4xl animate-bounce" style={{ animationDelay: '0s' }}>🎈</div>
-          <div className="absolute top-4 right-4 text-4xl animate-bounce" style={{ animationDelay: '0.5s' }}>🎈</div>
-          <div className="absolute bottom-4 left-4 text-3xl animate-bounce" style={{ animationDelay: '1s' }}>🌺</div>
-          <div className="absolute bottom-4 right-4 text-3xl animate-bounce" style={{ animationDelay: '1.5s' }}>🌺</div>
+          {/* Dekorasi Sudut (Balon Berayun & Bunga Berputar) */}
+          <div className="absolute top-4 left-4 text-5xl origin-bottom" style={{ animation: 'balloon-sway 3s ease-in-out infinite' }}>🎈</div>
+          <div className="absolute top-4 right-4 text-5xl origin-bottom" style={{ animation: 'balloon-sway 4s ease-in-out infinite reverse' }}>🎈</div>
+          
+          <div className="absolute bottom-4 left-4 text-4xl" style={{ animation: 'spin-slow 6s linear infinite' }}>🌺</div>
+          <div className="absolute bottom-4 right-4 text-4xl" style={{ animation: 'spin-slow 6s linear infinite reverse' }}>🌺</div>
 
           {/* --- TAMPILAN 1: IDLE --- */}
           {status === 'idle' && (
@@ -176,7 +186,7 @@ export default function Home() {
               <div className="relative inline-block mt-4">
                 <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full blur-lg opacity-50 animate-pulse"></div>
                 <p className="relative text-base md:text-lg font-bold text-blue-800 bg-gradient-to-r from-cyan-100 to-blue-100 py-3 px-8 rounded-full border-4 border-blue-400 shadow-lg">
-                  👉 Pencet tombol di samping untuk dengar petunjuk
+                  Pencet tombol di samping untuk dengar petunjuk
                 </p>
               </div>
             </div>
@@ -200,24 +210,33 @@ export default function Home() {
                     Browser tidak mendukung video.
                 </video>
               </div>
-
-              <h1 className="text-4xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 tracking-tight mb-6 drop-shadow-lg animate-pulse">
-                Dengarkan Suaranya...
+              <h1 className="text-4xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 tracking-tight mb-6 drop-shadow-lg animate-pulse pb-4 leading-normal">
+                Dengarkan teka tekinya...
               </h1>
-              <div className="bg-gradient-to-r from-yellow-200 to-orange-200 px-8 py-3 rounded-2xl border-4 border-orange-400 shadow-lg">
-                 <p className="text-orange-800 font-black text-lg">
-                   🎵 Sedang memutar petunjuk: <span className="underline decoration-wavy">{activeSlot.name}</span>
-                 </p>
-              </div>
             </div>
           )}
 
           {/* --- TAMPILAN 3A: SUCCESS WAITING --- */}
           {status === 'success_waiting' && (
-             <div className="absolute inset-0 z-50 bg-gradient-to-br from-green-300 to-emerald-200 rounded-[42px] flex flex-col items-center justify-center animate-zoom-in text-center p-4">
-                 {/* <div className="text-[100px] md:text-[120px] mb-4 animate-bounce">🎉</div> */}
-                 <h2 className="text-5xl md:text-7xl font-black text-white drop-shadow-[0_5px_5px_rgba(0,0,0,0.2)]">HEBAT!</h2>
-                 <p className="text-2xl md:text-3xl font-bold text-green-800 bg-white/60 px-8 py-3 rounded-full mt-4">
+             <div className="absolute inset-0 z-50 bg-[#6aeba2] rounded-[42px] flex flex-col items-center justify-center animate-zoom-in text-center p-4">
+                 
+                 {/* ANIMASI ANAK SENANG */}
+                 <div className="relative w-full h-64 md:h-80 mb-4 flex items-center justify-center">
+                    <video 
+                        autoPlay 
+                        loop 
+                        muted 
+                        playsInline 
+                        className="w-full h-full object-contain"
+                    >
+                        <source src="/videos/fiks.mp4" type="video/mp4" />
+                    </video>
+                 </div>
+
+                 <h2 className="text-5xl md:text-7xl font-black text-white drop-shadow-[0_4px_4px_rgba(0,0,0,0.2)] animate-bounce stroke-text">
+                    HEBAT!
+                 </h2>
+                 <p className="text-2xl md:text-3xl font-bold text-green-800 bg-white/60 px-8 py-3 rounded-full mt-4 shadow-lg">
                     Jawabannya Benar!
                  </p>
              </div>
@@ -234,7 +253,14 @@ export default function Home() {
                 {/* VIDEO SRC DINAMIS DARI SLOT */}
                 <source src={activeSlot.videoSrc} type="video/mp4" />
               </video>
-              
+              {/* Confetti Effect */}
+              <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-[42px]">
+                <div className="absolute top-0 left-[10%] text-4xl animate-fall" style={{ animationDelay: '0s' }}>🎉</div>
+                <div className="absolute top-0 left-[30%] text-5xl animate-fall" style={{ animationDelay: '0.2s' }}>⭐</div>
+                <div className="absolute top-0 left-[50%] text-4xl animate-fall" style={{ animationDelay: '0.4s' }}>🎊</div>
+                <div className="absolute top-0 left-[70%] text-5xl animate-fall" style={{ animationDelay: '0.6s' }}>✨</div>
+                <div className="absolute top-0 left-[90%] text-4xl animate-fall" style={{ animationDelay: '0.8s' }}>🌟</div>
+              </div>
             </div>
           )}
 
@@ -331,13 +357,13 @@ export default function Home() {
                  onClick={() => handleRFIDScan(activeSlot.correctCardId)}
                  className="bg-gradient-to-br from-green-400 to-emerald-500 hover:from-green-300 hover:to-emerald-400 text-white py-4 rounded-2xl font-black text-base shadow-xl border-4 border-green-600 active:translate-y-2 transform transition-all hover:scale-105"
                >
-                 ✅ Benar
+                 Benar
                </button>
                <button
                  onClick={() => handleRFIDScan("WRONG_ID")}
                  className="bg-gradient-to-br from-red-400 to-pink-500 hover:from-red-300 hover:to-pink-400 text-white py-4 rounded-2xl font-black text-base shadow-xl border-4 border-red-600 active:translate-y-2 transform transition-all hover:scale-105"
                >
-                 ❌ Salah
+                 Salah
                </button>
             </div>
           </div>
@@ -345,13 +371,24 @@ export default function Home() {
       )}
 
       <style jsx>{`
-        @keyframes float {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-20px); }
+        /* ANIMASI AWAN BERGERAK (Kiri-Kanan + Atas-Bawah) */
+        @keyframes cloud-drift {
+          0% { transform: translateX(0px) translateY(0px); }
+          25% { transform: translateX(20px) translateY(-10px); }
+          50% { transform: translateX(0px) translateY(-20px); }
+          75% { transform: translateX(-20px) translateY(-10px); }
+          100% { transform: translateX(0px) translateY(0px); }
         }
+
+        /* ANIMASI BALON BERAYUN */
+        @keyframes balloon-sway {
+          0%, 100% { transform: rotate(-10deg) translateY(0); }
+          50% { transform: rotate(10deg) translateY(-15px); }
+        }
+
         @keyframes twinkle {
-          0%, 100% { opacity: 0.3; }
-          50% { opacity: 1; }
+          0%, 100% { opacity: 0.3; transform: scale(0.8); }
+          50% { opacity: 1; transform: scale(1.2); }
         }
         @keyframes spin-slow {
           from { transform: rotate(0deg); }
@@ -360,11 +397,6 @@ export default function Home() {
         @keyframes bounce {
           0%, 100% { transform: translateY(0); }
           50% { transform: translateY(-10px); }
-        }
-        @keyframes wiggle {
-          0%, 100% { transform: rotate(0deg); }
-          25% { transform: rotate(-5deg); }
-          75% { transform: rotate(5deg); }
         }
         @keyframes wiggle-big {
           0%, 100% { transform: rotate(0deg) scale(1); }
