@@ -1,0 +1,59 @@
+@startuml RFID_Feedback_UseCase
+!theme plain
+title Use Case Diagram - Sistem RFID Feedback Berbasis IoT
+
+left to right direction
+skinparam actorStyle awesome
+skinparam backgroundColor #FEFEFE
+
+actor "User/Peserta" as User
+actor "🔘 Tombol Fisik" as Button
+actor "📇 Kartu RFID" as RFIDCard
+actor "🔊 Speaker" as Speaker
+actor "🖥️  Display/Monitor" as Monitor
+
+rectangle "SISTEM RFID FEEDBACK" {
+  usecase "UC1: Memilih Slot\nPertanyaan/Rambu" as UC1
+  usecase "UC2: Memutar\nClue Audio" as UC2
+  usecase "UC3: Menampilkan\nVideo Petunjuk" as UC3
+  usecase "UC4: Membaca\nKartu RFID" as UC4
+  usecase "UC5: Validasi\nJawaban (Match)" as UC5
+  usecase "UC6: Memutar\nSuccess Sound" as UC6
+  usecase "UC7: Menampilkan\nVideo Benar" as UC7
+  usecase "UC8: Memutar\nError Sound" as UC8
+  usecase "UC9: Reset\nke Idle" as UC9
+}
+
+' User interactions
+User --> Button
+Button --> UC1
+
+User --> RFIDCard
+RFIDCard --> UC4
+
+' Main flow
+UC1 --> UC2
+UC1 --> UC3
+
+UC2 --> Speaker
+UC3 --> Monitor
+
+' RFID validation
+UC4 --> UC5
+
+' Success path
+UC5 -->|Match| UC6
+UC6 --> Speaker
+UC6 --> UC7
+UC7 --> Monitor
+
+' Error path
+UC5 -->|No Match| UC8
+UC8 --> Speaker
+
+' Reset flow
+UC7 --> UC9
+UC8 --> UC9
+UC9 --> UC1
+
+@enduml

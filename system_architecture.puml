@@ -1,0 +1,87 @@
+@startuml RFID_System_Architecture
+!theme plain
+title Arsitektur Sistem RFID Feedback IoT
+
+' Define components
+package "INPUT DEVICES (IoT Hardware)" {
+  component "🔘 Physical Button" as Button
+  component "📇 RFID Reader" as RFIDReader
+}
+
+package "WEB APPLICATION (Interface & Logic)" {
+  component "Next.js Frontend" as WebApp
+  component "State Manager\n(React Hooks)" as StateManager
+  component "Event Handler" as EventHandler
+  component "Audio/Video\nPlayer Engine" as MediaEngine
+}
+
+package "OUTPUT DEVICES (IoT Hardware)" {
+  component "🔊 Speaker\n(Audio Output)" as Speaker
+  component "🖥️ Monitor\n(Video Output)" as Monitor
+}
+
+package "STORAGE (Assets)" {
+  database "Audio Files\n(/sounds/)" as AudioDB
+  database "Video Files\n(/videos/)" as VideoDB
+}
+
+' Relationships
+Button ..> EventHandler : Button Press Signal
+RFIDReader ..> EventHandler : RFID Card Data\n(Card ID)
+
+EventHandler --> StateManager : Update State\n(idle, listening,\nsuccess, error)
+
+StateManager --> MediaEngine : Trigger Audio/Video\nPlayback Commands
+
+MediaEngine --> AudioDB : Load Audio\nClue, Success,\nError Sounds
+MediaEngine --> VideoDB : Load Video\nPetunjuk & Jawaban
+
+MediaEngine --> Speaker : Stream Audio
+MediaEngine --> Monitor : Stream Video
+
+WebApp --> EventHandler : Orchestrate\nFlow Logic
+WebApp --> StateManager : Manage\nApplication State
+
+note right of Button
+  GPIO Signal
+  atau Serial Input
+end note
+
+note right of RFIDReader
+  Serial/USB Output
+  Format: Card ID String
+  Contoh: "CARD_RAMBU"
+end note
+
+note right of StateManager
+  States:
+  - idle
+  - listening
+  - success_waiting
+  - success
+  - error
+end note
+
+note right of MediaEngine
+  Control:
+  - Audio playback rate
+  - Video playback speed (0.6x)
+  - Timing orchestration
+end note
+
+note bottom of AudioDB
+  Files:
+  - clue-rambu.mp3
+  - clue-putar.mp3
+  - success.m4a
+  - error.mp3
+end note
+
+note bottom of VideoDB
+  Files:
+  - rambu-benar.mp4
+  - rambu-benar2.mp4
+  - (listening-visual-video)
+end note
+
+@enduml
